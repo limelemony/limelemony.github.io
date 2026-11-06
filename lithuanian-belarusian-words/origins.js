@@ -36,6 +36,10 @@ const international=new Set("kakava tortas bananas citrina studentas profesorius
 const contact=new Set("burokas baravykas česnakas cukrus karalius ponas knyga kruopos sodas kopūstas morka butelis kilimas katilas šventė žvakė stiklinė".split(" "));
 function note(w){
 const lt=w[1],be=w[2],en=w[3].toLowerCase();
+if(window.wordOriginStories && Object.prototype.hasOwnProperty.call(window.wordOriginStories,lt)){
+const n=window.wordOriginStories[lt];
+return {kind:n.kind||"candidate",title:n.title,description:n.description,source:n.source||null};
+}
 if(verified[lt]){const v=verified[lt];return {kind:"documented",title:v[0],description:v[1],source:v[2]}}
 if(examples[lt]){const e=examples[lt];return {kind:lt==="apranga"?"review":"candidate",title:e[0],description:e[1],source:e[2]}}
 if(international.has(lt))return {kind:"candidate",title:"Shared international vocabulary",description:lt+" and "+be+" ("+en+") resemble one another because both languages use a word circulating in European or international vocabulary. The specific loan routes have not been checked for this pair."};
@@ -54,9 +58,9 @@ el("origin-type").className="origin-type "+n.kind;
 el("origin-type").textContent=({documented:"Source-checked",candidate:"Provisional explanation",review:"Not yet researched"})[n.kind];
 el("origin-heading").textContent=n.title;
 el("origin-description").textContent=n.description;
-el("origin-disclaimer").textContent=n.kind==="documented"?"Explanation based on the referenced etymological source.":"A provisional learning note, not a source-verified entry. Please consult an etymological dictionary before citing the explanation as fact.";
+el("origin-disclaimer").textContent=n.kind==="documented"?"Explanation supported by a specific reference.":n.kind==="review"?"This pair needs a separate historical-language check; resemblance does not establish common origin.":"Provisional etymological interpretation. Not independently verified word by word; a scholarly reference is linked when available.";
 el("origin-source").href=n.source||(dictionary+encodeURIComponent(w[1]));
-el("origin-source").textContent=n.source?"Read etymological source ↗":"Look up this word in the Lithuanian dictionary ↗";
+el("origin-source").textContent=n.source?"Explore etymological reference ↗":"Research this word in the Lithuanian etymological database ↗";
 const list=visible(),pos=list.indexOf(index);
 el("origin-counter").textContent=pos>=0?(pos+1)+" / "+list.length:"";
 el("origin-prev").disabled=pos<=0;el("origin-next").disabled=pos<0||pos>=list.length-1;
