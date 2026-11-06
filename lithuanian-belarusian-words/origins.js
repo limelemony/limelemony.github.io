@@ -3,6 +3,9 @@
 "use strict";
 const dictionary="https://etimologija.baltnexus.lt/?w=";
 const verified={
+"gyventi":["Ancient Indo-European family of ‘life’ words","Lithuanian gyventi ‘to live’ is formed from the stem gyv- ‘alive’, as in gyvas. Belarusian жыць continues the related Slavic *žiti. Both belong to an old Indo-European family of words for being alive; this relationship is not a recent borrowing.",dictionary+"gyvenimas"],
+"fotelis":["A European loan from French","Lithuanian fotelis and Belarusian фатэль (older фотэль) both belong to the European family of words borrowed from French fauteuil ‘armchair’. Polish fotel is another close form. This is a historical borrowing, not an inherited Baltic–Slavic cognate.","https://www.vle.lt/straipsnis/fotelis/"],
+"ambasada":["International diplomatic vocabulary","Lithuanian ambasada and Belarusian амбасада are essentially the same international word for ‘embassy’. Both are ultimately connected with French ambassade and its older European predecessors, although the immediate borrowing route into each language may differ.","https://www.dictionnaire-academie.fr/article/A9A1394"],
 "suknelė":["Slavic clothing family","Lithuanian suknelė is a diminutive of suknia, a Slavic-origin word. Compare Polish suknia and the older sukno (‘cloth’). Belarusian сукенка belongs to the same clothing-word family. This is a relationship shaped by historical contact, not simply two unchanged ancient cognates.",dictionary+"suknel%C4%97"],
 "galva":["Ancient Baltic–Slavic word family","Lithuanian galva and Belarusian галава continue an ancient Baltic–Slavic word for ‘head’. The different vowel patterns arose as the Slavic and Baltic branches developed separately.",dictionary+"galva"],
 "žiema":["Ancient Baltic–Slavic word family","Lithuanian žiema and Belarusian зіма share an old word for ‘winter’. Historical Baltic and Slavic reconstructions show that the similarity predates the modern languages.",dictionary+"%C5%BEiema"],
@@ -11,6 +14,7 @@ const verified={
 "turgus":["Slavic loan into Lithuanian","Lithuanian turgus ‘market’ was borrowed from Slavic trade vocabulary related to Belarusian торг. The Lithuanian etymological database records this as a historical Slavic loan.",dictionary+"turgus"]
 };
 const examples={
+"apranga":["Similar sound and meaning, different word histories","Lithuanian apranga ‘clothing’ is built around rengti / aprengti (‘to dress’). Belarusian вопратка (‘clothes’) is connected with апратаць / апратка, whose historical Slavic forms are discussed in the Belarusian etymological dictionary. They resemble each other but no direct common etymology has been demonstrated.","https://verbum.by/esbm/apratac"],
 "agrastas":["Regional fruit-name borrowing","Lithuanian agrastas and Belarusian агрэст resemble Polish agrest. These words are part of a borrowed European fruit-name family, although the exact route into each language still needs checking."],
 "arbata":["A travelling word for tea","Lithuanian arbata and Belarusian гарбата (regional or older usage) are connected with the widely borrowed tea name represented by Polish herbata. Their similarity is not an ancient inherited root."],
 "blynas":["Regional pancake name","Lithuanian blynas and Belarusian блін share a common regional culinary stem. Slavic influence is relevant to the Lithuanian form, but the exact route still needs source checking."],
@@ -31,7 +35,7 @@ const contact=new Set("burokas baravykas česnakas cukrus karalius ponas knyga k
 function note(w){
 const lt=w[1],be=w[2],en=w[3].toLowerCase();
 if(verified[lt]){const v=verified[lt];return {kind:"documented",title:v[0],description:v[1],source:v[2]}}
-if(examples[lt]){const e=examples[lt];return {kind:"candidate",title:e[0],description:e[1]}}
+if(examples[lt]){const e=examples[lt];return {kind:lt==="apranga"?"review":"candidate",title:e[0],description:e[1],source:e[2]}}
 if(international.has(lt))return {kind:"candidate",title:"Shared international vocabulary",description:lt+" and "+be+" ("+en+") resemble one another because both languages use a word circulating in European or international vocabulary. The specific loan routes have not been checked for this pair."};
 if(contact.has(lt))return {kind:"candidate",title:"Possible borrowing through contact",description:lt+" and "+be+" ("+en+") occur in languages with centuries of contact. A shared or parallel borrowing through Baltic, Slavic or Polish usage is plausible, but its direction and date need a dictionary source."};
 if(inherited.has(lt))return {kind:"candidate",title:"Possible ancient cognates",description:"The resemblance between "+lt+" and "+be+" ("+en+") may reflect an old Baltic–Slavic or wider Indo-European root. Later sound changes and grammatical endings account for some differences. This reconstruction has not yet been independently verified for the individual pair."};
