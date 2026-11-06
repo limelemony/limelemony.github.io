@@ -142,4 +142,4 @@ name_res = [x.text if x.text else '' for x in name]
 ```
 Now the lengths of lists are `500 500 500` and we can proceed with pandas dataframe,
 and writing a csv. The remaining columns of the table are extracted using similar approach.
-The full script and resulting file are on my [github](https://github.com/belovanna/py_dir).
+The full script and resulting file are on my [github](https://github.com/limelemony/py_dir).
